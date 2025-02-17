@@ -9,5 +9,4 @@ htmlcov/
 .tox/
 docs/_build/
 curriculo/
-modelo.docx
 dados.db
