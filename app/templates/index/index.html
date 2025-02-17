@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Página Bootstrap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function navigate() {
+            window.location.pathname = "/new-form";  // Corrige a navegação
+        }
+    </script>
+    <style>
+        td.centralizado{
+            text-align: center; 
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex vh-100 justify-content-top align-items-top flex-column">
+        <div class="container text-center mb-4">
+            <hr>
+            <h1 class="mb-4">Gerador de Currículo</h1>
+            <hr>
+            <button class="btn btn-primary m-2" onclick="navigate()" aria-label="Ir para o formulário">Formulário</button>
+            <button class="btn btn-outline-secondary m-2" aria-label="Pesquisar currículos">Pesquisar</button>
+            <button class="btn btn-outline-secondary m-2" aria-label="Ver modelos disponíveis">Modelos</button>
+            
+        </div>
+
+        <!-- Tabela/Lista Responsiva -->
+        <div class="container">
+            <h2 class="text-right mb-2">Currículos</h2>
+
+            <!-- Apenas para telas grandes -->
+            <div class="table-responsive d-none d-md-block">
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>id.</th>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>Email</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for curriculo in curriculos %}
+                            <tr>
+                                <td class="centralizado">{{ curriculo[0] }}</td>  <!-- Id -->
+                                <td>{{ curriculo[1] }}</td>  <!-- Nome -->
+                                <td>{{ curriculo[3] }}</td>  <!-- Telefone -->
+                                <td>{{ curriculo[4] }}</td>  <!-- Email -->
+                                <td class="centralizado">
+                                    <button class="btn btn-info btn-sm">Editar</button>
+                                    <button class="btn btn-secondary btn-sm">Visualizar</button>
+                                    <a href="{{ url_for('download_file', id=curriculo[0]) }}" class="btn btn-success btn-sm">Baixar</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">Nenhum currículo cadastrado.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Apenas para telas pequenas -->
+            <div class="d-block d-md-none">
+                {% for curriculo in curriculos %}
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ curriculo[1] }}</h5> <!-- Nome -->
+                            <p class="card-text"><strong>Telefone:</strong>  {{ curriculo[3] }}<br> <strong>Email:</strong> {{ curriculo[4] }}</p>
+                            
+                            <div class="text-end">
+                                <button class="btn btn-info btn-sm">Editar</button>
+                                <button class="btn btn-secondary btn-sm">Visualizar</button>
+                                <a href="{{ url_for('download_file', id=curriculo[0]) }}" class="btn btn-success btn-sm">Baixar</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="text-center">Nenhum currículo cadastrado.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

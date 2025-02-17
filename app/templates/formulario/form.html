@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Página Bootstrap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="justify-content-center align-items-center">
+        <div class="container text-center">
+            <form method="post" action="submit">
+                <div id="dadosPessoais">
+                    <hr>
+                    <h1 class="mb-4">Dados Pessoais</h1>
+                    <hr>
+                    <div class="mb-3 text-start">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="off" autocorrect="off" spellcheck="false">
+                    </div>
+                    <div class="mb-3 text-start">
+                        <label for="endereco" class="form-label">Endereço</label>
+                        <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Digite seu endereço" autocomplete="off" autocorrect="off" spellcheck="false">
+                    </div>
+                    <div class="mb-3 text-start">
+                        <label for="telefone" class="form-label">Telefone</label>
+                        <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Digite seu telefone" autocomplete="off" autocorrect="off" spellcheck="false">
+                    </div>
+                    <div class="mb-3 text-start">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" autocomplete="off" autocorrect="off" spellcheck="false">
+                    </div>
+                    <div class="mb-3 text-start">
+                        <label for="endereco" class="form-label">Objetivo</label>
+                        <textarea class="form-control" id="objetivo" name="objetivo" placeholder="Digite seu objetivo" autocomplete="off" autocorrect="off" spellcheck="false" rows="3" style="resize: none; overflow: hidden;">Contribuir com minhas habilidades e conhecimentos para o crescimento e sucesso da empresa, buscando constantemente aprendizado, aprimoramento profissional e entregas de resultados positivos.</textarea>
+                    </div>
+                    <div class="mb-3 text-start">
+                        <label for="endereco" class="form-label">Perfil profissional</label>
+                        <textarea class="form-control" id="perfil" name="perfil" placeholder="Digite seu perfil profissional" autocomplete="off" autocorrect="off" spellcheck="false" rows="3" style="resize: none; overflow: hidden;">Profissional dedicado, com habilidades em trabalho em equipe, resolução de problemas e aprendizado contínuo. Comprometido com a qualidade, eficiência e excelência no desempenho das atividades, buscando contribuir para o crescimento da empresa e o aprimoramento profissional.</textarea>
+                    </div>
+                </div>
+
+                <div id="escolaridadeCursos">
+                    <hr>
+                    <h1 class="mb-4">Escolaridade e Cursos</h1>
+                    <hr>
+                    <div id="blocosEscolaridade">
+                        <!-- Blocos de escolaridade serão adicionados aqui -->
+                    </div>
+                    <button type="button" class="btn btn-success mb-2" onclick="adicionarBloco('escolaridade')">Adicionar Escolaridade</button>
+                </div>
+
+                <div id="experienciasProfissionais">
+                    <hr>
+                    <h1 class="mb-4">Experiências Profissionais</h1>
+                    <hr>
+                    <div id="blocosExperiencia">
+                        <!-- Blocos de escolaridade serão adicionados aqui -->
+                    </div>
+                    <button type="button" class="btn btn-success mb-2" onclick="adicionarBloco('experiencia')">Adicionar Experiências</button>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </div>
+            
+            <script>
+                // Função para adicionar um novo bloco de escolaridade
+                function adicionarBloco(contexto) {
+                    if (contexto == 'escolaridade'){
+                        const blocosEscolaridade = document.getElementById('blocosEscolaridade');
+            
+                        const novoBloco = document.createElement('div');
+                        novoBloco.classList.add('escolaridade-bloco');
+                        novoBloco.style.border = '1px solid #ccc';
+                        novoBloco.style.padding = '20px';
+                        novoBloco.style.marginBottom = '10px';
+                        novoBloco.style.borderRadius = '5px';
+                
+                        // Adiciona o conteúdo ao novo bloco
+                        novoBloco.innerHTML = `
+                                <div class="mb-3">
+                                    <label for="escola" class="form-label">Escola/Instituição</label>
+                                    <input type="text" class="form-control" name="instituicao[]" placeholder="Nome da Instituição">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="curso" class="form-label">Curso/Área</label>
+                                    <input type="text" class="form-control" name="curso[]" placeholder="Nome do Curso/Área">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="ano" class="form-label">Ano de Conclusão</label>
+                                    <input type="number" class="form-control" name="ano[]" placeholder="Ano de Conclusão">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="status" class="form-label">Status</label>
+                                    <select class="form-select" name="status[]" aria-label="Status">
+                                        <option value="concluido">Concluído</option>
+                                        <option value="em_andamento">Em Andamento</option>
+                                        <option value="interrompido">Incompleto</option>
+                                        <option value="trancado">Trancado</option>
+                                    </select>
+                                </div>
+    
+                                <button type="button" class="btn btn-danger" onclick="deletarBloco(this)">Deletar</button>
+                        `;
+                
+                        // Adiciona o novo bloco ao contêiner
+                        blocosEscolaridade.appendChild(novoBloco);
+                    }
+                    if (contexto == 'experiencia'){
+                        const blocosEscolaridade = document.getElementById('blocosExperiencia');
+            
+                        const novoBloco = document.createElement('div');
+                        novoBloco.classList.add('experiencia-bloco');
+                        novoBloco.style.border = '1px solid #ccc';
+                        novoBloco.style.padding = '20px';
+                        novoBloco.style.marginBottom = '10px';
+                        novoBloco.style.borderRadius = '5px';
+                
+                        // Adiciona o conteúdo ao novo bloco
+                        novoBloco.innerHTML = `
+                                <div class="mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <input type="text" class="form-control w-50" name="tempo_inicio[]" placeholder="Início">
+                                        <span class="mx-2">–</span>
+                                        <input type="text" class="form-control w-50" name="tempo_fim[]" placeholder="Fim">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="empresa" class="form-label">Empresa</label>
+                                    <input type="text" class="form-control" name="empresa[]" placeholder="Nome da Empresa">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="cargo" class="form-label">Cargo</label>
+                                    <input type="text" class="form-control" name="cargo[]" placeholder="Cargo">
+                                </div>
+    
+                                <button type="button" class="btn btn-danger" onclick="deletarBloco(this)">Deletar</button>
+                        `;
+                
+                        // Adiciona o novo bloco ao contêiner
+                        blocosEscolaridade.appendChild(novoBloco);
+                    }
+                    
+                }
+                
+            
+                // Função para deletar o bloco
+                function deletarBloco(botao) {
+                    const bloco = botao.parentElement; // Pega o elemento pai (o bloco)
+                    bloco.remove(); // Remove o bloco
+                }
+            </script>
+            
+
+            
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
